@@ -16,7 +16,7 @@ export const Login = () => {
         const user = users.find(u => u.username === username && u.password === password)
         if (user) {
             timedAlert('success', `¡Bienvenido ${username}!`)
-            navigate('/fail')
+            navigate('/home')
         } else {
             defaultAlert('error', 'Error al inciar sesión', 'Contraseña o usuario incorrecto')
         }

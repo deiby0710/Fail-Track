@@ -1,5 +1,5 @@
 import React from "react";
-import ErrorForm from "../components/ErrorForm";
+import ErrorForm from "../components/ErrorRegister/ErrorForm";
 
 export const FailPage = () => {
     return (
