@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function ErrorForm() {
+export const ErrorForm = () => {
     const [ formData, setFormData ] = useState({
         nombre: '',
         punto: '',

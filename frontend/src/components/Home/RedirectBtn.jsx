@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function RedirectBtn({texto, route}) {
+export const RedirectBtn = ({texto, route}) => {
     const navigate = useNavigate();
     const handleButton = () => {
         navigate(route)
