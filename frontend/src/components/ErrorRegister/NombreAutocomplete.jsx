@@ -1,52 +1,35 @@
-import { useState, useEffect } from "react";
+import { useRef, useEffect } from "react";
 
 export const NombreAutocomple = ({usuarios, formData, onSelect }) => {
-    const [busqueda, setBusqueda] = useState('');
-    const [sugerencias, setSugerencias] = useState([]);
+    const inputRef = useRef(null);
 
-    // Cuando cambie  el valor del input Filtramos
     useEffect(() => {
-        if (busqueda.trim() === '') {
-            setSugerencias([]);
-            return;
+        if (window.Awesomplete) {
+            new Awesomplete(inputRef.current, {
+                list: usuarios.map((u) => u.nombre),
+                minChars: 1,
+                autoFirst: true,
+            });
         }
+    }, [usuarios]);
 
-        const filtrados = usuarios.filter((u) => 
-            u.nombre.toLowerCase().includes(busqueda.toLowerCase())
-        )
-        setSugerencias(filtrados)
-    }, [busqueda, usuarios]);
-
-    const handleSelect = (usuario) => {
-        console.log(usuario)
-        // setBusqueda(usuario.nombre);
-        // setSugerencias([]);
-        // onSelect(usuario);
-    }
+    const handleChange = (e) => {
+        const seleccionado = e.target.value;
+        const usuario = usuarios.find((u) => u.nombre === seleccionado);
+        if (usuario) {
+        onSelect(usuario);
+        }
+    };
 
     return (
         <div>
             <input
+                ref={inputRef}
                 type="text"
                 className="form-control"
-                value={busqueda}
-                onChange={(e) => setBusqueda(e.target.value)}
+                placeholder="Escribe tu nombre..."
+                onChange={handleChange}
             />
-
-            {sugerencias.length > 0 && (
-                <ul className="list-group mt-2">
-                {sugerencias.map((usuario) => (
-                    <li
-                    key={usuario.id}
-                    className="list-group-item list-group-item-action"
-                    style={{ cursor: "pointer" }}
-                    onClick={() => handleSelect(usuario)}
-                    >
-                    {usuario.nombre} – {usuario.punto}
-                    </li>
-                ))}
-                </ul>
-            )}
         </div>
     );
 }

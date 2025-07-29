@@ -25,25 +25,27 @@ export const ErrorForm = () => {
         { id: 5, nombre: "Luis Hernández", punto: "Punto Oriente" },
         { id: 6, nombre: "María José Rivas", punto: "Punto Centro" },
         { id: 7, nombre: "Juali Costas", punto: "Punto Centro" },
-        { id: 7, nombre: "Juali Costas", punto: "Punto Centro" },
-        { id: 7, nombre: "Juali Costas", punto: "Punto Centro" },
-        { id: 7, nombre: "Juali Costas", punto: "Punto Centro" },
-        { id: 7, nombre: "Juali Costas", punto: "Punto Centro" },
-        { id: 7, nombre: "Juali Costas", punto: "Punto Centro" },
-        { id: 7, nombre: "Juali Costas", punto: "Punto Centro" },
-        { id: 7, nombre: "Juali Costas", punto: "Punto Centro" },
-        { id: 7, nombre: "Juali Costas", punto: "Punto Centro" },
-        { id: 7, nombre: "Juali Costas", punto: "Punto Centro" },
-        { id: 7, nombre: "Juali Costas", punto: "Punto Centro" }
+        { id: 8, nombre: "Juali Costas", punto: "Punto Centro" },
+        { id: 9, nombre: "Juali Costas", punto: "Punto Centro" },
+        { id: 10, nombre: "Juali Costas", punto: "Punto Centro" },
+        { id: 11, nombre: "Juali Costas", punto: "Punto Centro" },
+        { id: 12, nombre: "Juali Costas", punto: "Punto Centro" },
+        { id: 13, nombre: "Juali Costas", punto: "Punto Centro" },
+        { id: 14, nombre: "Juali Costas", punto: "Punto Centro" },
+        { id: 15, nombre: "Juali Costas", punto: "Punto Centro" },
+        { id: 16, nombre: "Juali Costas", punto: "Punto Centro" },
+        { id: 17, nombre: "Juali Costas", punto: "Punto Centro" }
     ];
 
+    // Funcion: Enviar registrar error.
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("Datos enviados al back end: ", formData)
     }
 
-    const handleSelect = () => {
-
+    const handleSelect = (nombre) => {
+        console.log("Nombre elegido:", nombre);
+        // podrías redirigir o almacenar en un context/state global
     }
 
     return (
@@ -51,12 +53,18 @@ export const ErrorForm = () => {
             <div className="row mb-3">
                 <div className="col">
                     <label className="form-label">Nombre</label>
-                    {/* <input type="text" className="form-control" name="nombre" onChange={handleChange} /> */}
-                    <NombreAutocomple usuarios={usuariosMock}/>
+                    <input type="text" className="form-control" name="nombre" onChange={handleChange} />
+                    {/* <NombreAutocomple usuarios={usuariosMock} onSelect={handleSelect}/> */}
                 </div>
                 <div className="col">
                     <label className="form-label">Tipo de error</label>
-                    <input type="text" className="form-control" name="tipoError" onChange={handleChange} />
+                    <select className="form-select" name="tipoError" onChange={handleChange}>
+                        <option value="" disabled selected> Seleccione una opción </option>
+                        <option>Error 1</option>
+                        <option>Error 2</option>
+                        <option>Error 3</option>
+                        <option>Error 4</option>
+                    </select>
                 </div>
             </div>
 
@@ -68,6 +76,7 @@ export const ErrorForm = () => {
                 <div className="col">
                     <label className="form-label">Modalidad</label>
                     <select className="form-select" name="modalidad" onChange={handleChange}>
+                        <option value="" disabled selected> Seleccione una opción </option>
                         <option>Cápita</option>
                         <option>Evento</option>
                     </select>
@@ -81,7 +90,14 @@ export const ErrorForm = () => {
                 </div>
                 <div className="col">
                     <label className="form-label">EPS</label>
-                    <input type="text" className="form-control" name="eps" onChange={handleChange} />
+                    <select className="form-select" name="eps" onChange={handleChange}>
+                        <option value="" disabled selected> Seleccione una opción </option>
+                        <option>EMSSANAR EPS SAS</option>
+                        <option>MALLAMAS EPS</option>
+                        <option>SANITAS EPS</option>
+                        <option>ASMET SALUD EPS</option>
+                        <option>SOS SALUD</option>
+                    </select>
                 </div>
             </div>
 
