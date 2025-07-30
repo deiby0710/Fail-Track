@@ -1,5 +1,5 @@
 import React from "react";
-import {RedirectBtn} from "../components/Home/RedirectBtn";
+import {RedirectBtn} from "../components/Buttons/RedirectBtn";
 
 export const Home = () => {
     return (
@@ -8,8 +8,8 @@ export const Home = () => {
                 <h1>Fail Track</h1>
                 <div className="d-flex flex-column">
                     <RedirectBtn texto="Registro de errores" route="/errorRegister"/>
-                    <RedirectBtn texto="Registro de errores" route="/errorRegister"/>
-                    <RedirectBtn texto="Reportes" route="/errorRegister"/>
+                    <RedirectBtn texto="Registro de devoluciones" route="/errorRegister"/>
+                    <RedirectBtn texto="Reportes" route="/reportes"/>
                 </div>
             </div>
         </div>
