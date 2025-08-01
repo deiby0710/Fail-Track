@@ -3,6 +3,7 @@ import { Login } from '../pages/Login'
 import { FailPage } from '../pages/ErrorRegister'
 import { Home } from '../pages/Home'
 import { Reports } from '../pages/Reports'
+import { ReturnRecord } from '../pages/ReturnRecord'
 
 export const AppRouter = () => {
     return (
@@ -12,6 +13,7 @@ export const AppRouter = () => {
             <Route path='errorRegister' element={<FailPage/>}/>
             <Route path='home' element={<Home/>}/>
             <Route path='reportes' element={<Reports/>}/>
+            <Route path='devoluciones' element={<ReturnRecord/>}/>
         </Routes>
     )
 }

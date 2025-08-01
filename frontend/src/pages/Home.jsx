@@ -8,7 +8,7 @@ export const Home = () => {
                 <h1>Fail Track</h1>
                 <div className="d-flex flex-column">
                     <RedirectBtn texto="Registro de errores" route="/errorRegister"/>
-                    <RedirectBtn texto="Registro de devoluciones" route="/errorRegister"/>
+                    <RedirectBtn texto="Registro de devoluciones" route="/devoluciones"/>
                     <RedirectBtn texto="Reportes" route="/reportes"/>
                 </div>
             </div>
