@@ -45,11 +45,6 @@ export const ErrorLogForm = () => {
         console.log("Datos enviados al back end: ", formData)
     }
 
-    const handleSelect = (nombre) => {
-        console.log("Nombre elegido:", nombre);
-        // podrías redirigir o almacenar en un context/state global
-    }
-
     return (
         <div className="pt-5 pb-4 ps-4 pe-4 border border-2 text-center rounded-3 bg-white shadow" style={{ minWidth: '800px' }}>
             <h1>Registro de errores</h1>
