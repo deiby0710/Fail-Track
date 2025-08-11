@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NombreAutocomple } from '../ErrorRegister/NombreAutocomplete'
+import { NombreAutocomplete } from "../Inputs/NombreAutocomplete";
 import { CurrentDate } from "../Inputs/CurrentDate";
 import { SelectOption } from "../Inputs/SelectOpcion";
 
@@ -57,8 +57,13 @@ export const ErrorLogForm = () => {
                 <div className="row mb-3">
                     <div className="col">
                         <label className="form-label">Nombre</label>
-                        <input type="text" className="form-control" name="nombre" onChange={handleChange} />
-                        {/* <NombreAutocomple usuarios={usuariosMock} setformData={setFormData}/> */}
+                        <NombreAutocomplete usuarios={usuariosMock}
+                            name="nombre"
+                            value={formData.nombre || ""}
+                            onChange={handleChange}
+                            onSelect={(u) =>
+                                setFormData(prev => ({ ...prev, nombre: u.nombre, punto: u.punto }))
+                            }/>
                     </div>
                     <div className="col">
                         <label className="form-label">Tipo de error</label>
@@ -71,7 +76,7 @@ export const ErrorLogForm = () => {
                 <div className="row mb-3">
                     <div className="col">
                         <label className="form-label">Punto</label>
-                        <input type="text" className="form-control" name="punto" onChange={handleChange} />
+                        <input type="text" className="form-control" name="punto" value={formData.punto || ""} onChange={handleChange} />
                     </div>
                     <div className="col">
                         <label className="form-label">Modalidad</label>
