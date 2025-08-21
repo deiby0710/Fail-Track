@@ -3,6 +3,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import RegistroErrores from './src/routes/RouteRegistroErrores.js'
 import RegistroDevoluciones from './src/routes/RouteRegistroDev.js'
+import Users from './src/routes/RoutesUser.js'
 
 //cargamos las variables .env
 dotenv.config()
@@ -15,6 +16,7 @@ app.use(express.json())
 
 app.use('/api/registroErrores', RegistroErrores)
 app.use('/api/RegistroDevoluciones', RegistroDevoluciones)
+app.use('/api/Users', Users)
 app.get('/', (_, res) => res.json({ ok: true, name: 'Fail Track API' }))
 
 

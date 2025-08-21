@@ -40,3 +40,16 @@ model Devoluciones {
     @@index([punto])
     @@index([tipoContrato])
 }
+
+model Usuarios {
+    id             Int     @id @default(autoincrement())
+    nombrecompleto String? @db.VarChar(100)
+    cedula         String? @db.VarChar(20)
+    username       String? @db.VarChar(50)
+    password       String? @db.VarChar(60)
+    sede           String? @db.VarChar(50)
+    role           String? @db.VarChar(20)
+
+    @@index([username])
+    @@index([cedula])
+}
