@@ -14,7 +14,7 @@ export const ReturnRecord = () => {
     }
     return (
         <div className="d-flex justify-content-center align-items-center vh-100">
-            <ReturnRecordForm onSubmit={handleSubmit} submitting={loading}/>
+            <ReturnRecordForm onSubmit={handleSubmit} btnAvailable={loading}/>
         </div>
     )
 }

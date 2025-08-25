@@ -3,7 +3,7 @@ import { NombreAutocomplete } from "../Inputs/NombreAutocomplete";
 import { CurrentDate } from "../Inputs/CurrentDate";
 import { SelectOption } from "../Inputs/SelectOpcion";
 
-export const ErrorLogForm = () => {
+export const ErrorLogForm = ({onSubmit, btnAvailable}) => {
     const [ formData, setFormData ] = useState({
         nombre: '',
         punto: '',
@@ -43,6 +43,7 @@ export const ErrorLogForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("Datos enviados al back end: ", formData)
+        onSubmit(formData)
     }
 
     return (
@@ -95,7 +96,7 @@ export const ErrorLogForm = () => {
                 </div>
 
                 <div className="text-center">
-                    <button className="btn btn-dark" type="submit">Registrar error</button>
+                    <button className="btn btn-dark" type="submit" disabled={btnAvailable}>Registrar error</button>
                 </div>
             </form>
         </div>

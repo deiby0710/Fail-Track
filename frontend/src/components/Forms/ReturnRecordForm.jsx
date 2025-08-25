@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const ReturnRecordForm = ({onSubmit, submitting}) => {
+export const ReturnRecordForm = ({onSubmit, btnAvailable}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const fd = new FormData(e.currentTarget);
@@ -58,7 +58,7 @@ export const ReturnRecordForm = ({onSubmit, submitting}) => {
                         <input type="text" className="form-control" name="modalidad"/>
                     </div>
                     <div className="col d-flex justify-content-center align-items-end">
-                        <button className="btn btn-dark">Enviar</button>
+                        <button className="btn btn-dark" disabled={btnAvailable}>Enviar</button>
                     </div>
                 </div>
             </form>

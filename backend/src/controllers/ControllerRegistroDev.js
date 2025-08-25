@@ -1,4 +1,5 @@
 import { RegistroDevolucionesS } from "../service/ServiceRegistroDev.js";
+import { formateDate } from "../utils/dates.js";
 
 export const RegistroDevolucionesC = async(req, res) => {
     try {
@@ -17,8 +18,8 @@ export const RegistroDevolucionesC = async(req, res) => {
         }
 
         const respuesta = await RegistroDevolucionesS({
-            fechaEnvio,
-            fechaDevolucion,
+            fechaEnvio: formateDate(fechaEnvio),
+            fechaDevolucion: formateDate(fechaDevolucion),
             numFactura,
             punto,
             tipoContrato,

@@ -20,14 +20,12 @@ export function useCreateDevolution() {
                 modalidad: values.modalidad                     
             };
 
-            console.log('Payload: ', payload)
-
             const data = await createRegistroDev(payload);
 
             return data
         } catch (error) {
-            setError(err);
-            throw err
+            setError(error);
+            throw error
         } finally {
             setLoading(false);
         }
