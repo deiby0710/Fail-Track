@@ -1,7 +1,7 @@
 import axios from "axios";
 import { api } from "../api/axiosConfig";
 
-export const createRegistroErrores = async () => {
+export const createRegistroErrores = async (data) => {
     const mockRes = {
         nombre: "Deiby Alejandro Delgado",
         tipoError: "Mal codigicado",
@@ -10,8 +10,17 @@ export const createRegistroErrores = async () => {
         fecha: "2024-11-06T00:00:00.000Z",
         eps: "SANITAS EPS"
     }
+    const requestBody = {
+        nombre: data.nombre,
+        tipoError: data.tipoError,
+        punto: data.punto,
+        modalidad: data.modalidad,
+        fecha: data.fecha,
+        eps: data.eps
+    }
+    console.log("Request body: ",requestBody)
     try {
-        const response = await api.post('api/registroErrores', mockRes)
+        const response = await api.post('api/registroErrores', requestBody)
         return response.data
     } catch (error) {
         console.error('Error en el servicio de createRegistroErrores: ', error);
