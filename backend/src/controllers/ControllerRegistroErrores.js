@@ -1,4 +1,5 @@
 import { createError } from "../service/ServiceRegistroErrores.js";
+import { formateDate } from "../utils/dates.js";
 
 export const  createRegistroError = async(req, res) => {
     try {
@@ -13,7 +14,7 @@ export const  createRegistroError = async(req, res) => {
             tipoError,
             punto,
             modalidad,
-            fecha,
+            fecha: formateDate(fecha),
             eps
         });
 
