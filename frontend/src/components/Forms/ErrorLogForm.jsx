@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NombreAutocomplete } from "../Inputs/NombreAutocomplete";
 import { CurrentDate } from "../Inputs/CurrentDate";
 import { SelectOption } from "../Inputs/SelectOpcion";
 
-export const ErrorLogForm = ({onSubmit, btnAvailable}) => {
+export const ErrorLogForm = ({onSubmit, btnAvailable, users}) => {
     const [ formData, setFormData ] = useState({
         nombre: '',
         punto: '',
@@ -15,7 +15,15 @@ export const ErrorLogForm = ({onSubmit, btnAvailable}) => {
     
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value}))
+        if (name === 'nombre' && value === '') {
+            setFormData((prev) => ({
+                ...prev, 
+                [name]: value,
+                punto: ''
+            }));
+        } else {
+            setFormData((prev) => ({ ...prev, [name]: value}))
+        }
     }
 
         // Funcion para traer los datos del Back end
@@ -53,7 +61,7 @@ export const ErrorLogForm = ({onSubmit, btnAvailable}) => {
                 <div className="row mb-3">
                     <div className="col">
                         <label className="form-label">Nombre</label>
-                        <NombreAutocomplete usuarios={usuariosMock}
+                        <NombreAutocomplete usuarios={users}
                             name="nombre"
                             value={formData.nombre || ""}
                             onChange={handleChange}
@@ -72,7 +80,14 @@ export const ErrorLogForm = ({onSubmit, btnAvailable}) => {
                 <div className="row mb-3">
                     <div className="col">
                         <label className="form-label">Punto</label>
-                        <input type="text" className="form-control" name="punto" value={formData.punto || ""} onChange={handleChange} />
+                        <input 
+                            type="text" 
+                            className="form-control" 
+                            name="punto" 
+                            value={formData.punto || ""} 
+                            onChange={handleChange} 
+                            disabled={true}
+                            placeholder="Punto"/>
                     </div>
                     <div className="col">
                         <label className="form-label">Modalidad</label>

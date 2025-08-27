@@ -3,6 +3,6 @@ import { getUsersNameSedeC } from "../controllers/ControllerUser.js";
 
 const router = Router()
 
-router.get('/', getUsersNameSedeC);
+router.get('/NamePunto', getUsersNameSedeC);
 
 export default router;

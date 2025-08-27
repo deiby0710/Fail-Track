@@ -1,5 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 
+// useRef: Referenciar elementos html.
+// useMemo: memorizar valores
+
 /**
  * NombreAutocomplete (Bootstrap)
  *
@@ -31,18 +34,20 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 export const NombreAutocomplete = ({
     usuarios,
     name = "nombre",
-    value,
-    onChange,
-    onSelect,
+    value, // Texto actual del input
+    onChange, // Funcion cuando el texto del input cambia.
+    onSelect, // Funcion que se ejecuta cuando seleccionas un usuario de la lista.
     placeholder = "Buscar nombre…",
     maxResults = 8,
     }) => {
-        const [open, setOpen] = useState(false);
-        const [highlighted, setHighlighted] = useState(0);
-        const rootRef = useRef(null);
-        const inputRef = useRef(null);
+        const [open, setOpen] = useState(false); // Lista de sugerencias visible 
+        const [highlighted, setHighlighted] = useState(0); // Indice del usuario que se esta senalando 
+        const rootRef = useRef(null); // Una referencia al div principal del componente para saber si el clic del usuario está dentro o fuera de él.
+        const inputRef = useRef(null); //  Una referencia al input para poder interactuar con él directamente (por ejemplo, para darle el foco).
         const listboxId = useMemo(() => `listbox-${Math.random().toString(36).slice(2)}`,[ ]);
-
+        // Crea un ID único para la lista de sugerencias. Esto es importante para la accesibilidad (para que la pantalla pueda leer la lista).
+        
+        // Normalize hace que: Angel y angel sean lo mismo
         const normalize = (s) =>
             (s || "")
             .normalize("NFD")
@@ -147,7 +152,7 @@ export const NombreAutocomplete = ({
             <button
                 type="button"
                 className="btn btn-light btn-sm"
-                onClick={() => { emitChange(""); setOpen(true); setHighlighted(0); }}
+                onClick={() => { emitChange(""); setOpen(false); setHighlighted(0); }}
                 aria-label="Limpiar búsqueda"
             >
                 Limpiar
