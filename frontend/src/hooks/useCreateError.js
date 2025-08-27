@@ -21,8 +21,6 @@ export function useCreateError() {
 
             const response = await createRegistroErrores(data)
 
-            console.log(response)
-
             return response
         } catch (error) {
             setError(error)

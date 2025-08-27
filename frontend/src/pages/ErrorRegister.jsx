@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { ErrorLogForm } from '../components/Forms/ErrorLogForm'
 import { useCreateError } from "../hooks/useCreateError";
 import { getUsersNameSede } from '../services/serviceUser';
+import { timedAlert, defaultAlert } from '../utils/alert';
 
 export const FailPage = () => {
     const {apiResponse, loading, error} = useCreateError();
@@ -13,15 +14,19 @@ export const FailPage = () => {
             setUsers(res)
         })();
     }, []);
-
-    console.log(users)
-
     const handleSubmit = async (values) => {
         try {
+            for (let clave in values) {
+                if(!values[clave]) {
+                    defaultAlert('info','Faltan campos por registrar',`Digite: ${clave}`)
+                    return ;
+                }
+            }
             await apiResponse(values);
-            alert('Error creado con exito.')
+            timedAlert('success', `Registro creado con exito.`)
         } catch (err) {
-            alert("No se pudo crear el registro. Revisa los datos e inténtalo de nuevo.")
+            timedAlert('error', `No se pudo crear el registro`)
+            console.error("El  error viene de  ErrorRegister: ",err)
         }
     }
     return (
