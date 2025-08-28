@@ -45,11 +45,10 @@ model Usuarios {
     id             Int     @id @default(autoincrement())
     nombre         String? @db.VarChar(100)
     identificacion String? @db.VarChar(20)
-    username       String? @db.VarChar(50)
+    username       String  @unique  @db.VarChar(50) 
     password       String? @db.VarChar(60)
     punto          String? @db.VarChar(50)
     role           String? @db.VarChar(20)
 
-    @@index([username])
     @@index([identificacion])
 }
