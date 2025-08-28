@@ -18,7 +18,6 @@ export const createRegistroErrores = async (data) => {
         fecha: data.fecha,
         eps: data.eps
     }
-    console.log("Request body: ",requestBody)
     try {
         const response = await api.post('api/registroErrores', requestBody)
         return response.data

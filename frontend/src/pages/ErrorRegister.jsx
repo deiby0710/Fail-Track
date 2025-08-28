@@ -24,6 +24,7 @@ export const FailPage = () => {
             }
             await apiResponse(values);
             timedAlert('success', `Registro creado con exito.`)
+            return true;
         } catch (err) {
             timedAlert('error', `No se pudo crear el registro`)
             console.error("El  error viene de  ErrorRegister: ",err)

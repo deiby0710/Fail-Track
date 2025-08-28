@@ -48,10 +48,19 @@ export const ErrorLogForm = ({onSubmit, btnAvailable, users}) => {
     ];
 
     // Funcion: Enviar registrar error.
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Datos enviados al back end: ", formData)
-        onSubmit(formData)
+        const response = await onSubmit(formData)
+        if(response===true){
+            setFormData({
+                nombre: '',
+                punto: '',
+                fecha: new Date().toISOString().split("T")[0],
+                tipoError: '',
+                modalidad: '',
+                eps: ''
+            })
+        }
     }
 
     return (
