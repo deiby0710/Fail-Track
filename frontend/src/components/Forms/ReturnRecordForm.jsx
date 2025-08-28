@@ -1,19 +1,34 @@
 import React, { useState } from "react";
 
 export const ReturnRecordForm = ({onSubmit, btnAvailable}) => {
-    const handleSubmit = (e) => {
+    const [formData, setFormData] = useState({
+            fechaEnvio: "",
+            fechaDevolucion: "",
+            numFactura: "",
+            punto: "",
+            tipoContrato: "",
+            facturaNueva: "",
+            modalidad: "",
+        })
+    const handleChange = (e)=>{
+        setFormData({
+            ...formData, [e.target.name]: e.target.value,
+        });
+    };
+    const handleSubmit = async(e) => {
         e.preventDefault();
-        const fd = new FormData(e.currentTarget);
-        const values = {
-            fechaEnvio: fd.get("fechaEnvio") || "",
-            fechaDevolucion: fd.get("fechaDevolucion") || "",
-            numFactura: fd.get("numFactura") || "",
-            punto: fd.get("punto") || "",
-            tipoContrato: fd.get("tipoContrato") || "",
-            facturaNueva: fd.get("facturaNueva") || "",
-            modalidad: fd.get("modalidad") || ""
-        };
-        onSubmit?.(values);
+        const response = await onSubmit?.(formData);
+        if(response===true){
+            setFormData({
+                fechaEnvio: "",
+                fechaDevolucion: "",
+                numFactura: "",
+                punto: "",
+                tipoContrato: "",
+                facturaNueva: "",
+                modalidad: "",
+            });
+        }
     }
     return (
         <div className="pt-4 pb-4 ps-4 pe-4 border border-2 text-center rounded-3 bg-white shadow" style={{ minWidth: '800px' }}>
@@ -22,40 +37,75 @@ export const ReturnRecordForm = ({onSubmit, btnAvailable}) => {
                 <div className="row mb-3">
                     <div className="col">
                         <label className="form-label">Fecha Envío</label>
-                        <input type="date" name="fechaEnvio" className="form-control"/>
+                        <input
+                            type="date" 
+                            name="fechaEnvio" 
+                            className="form-control" 
+                            value={formData.fechaEnvio || ""}
+                            onChange={handleChange}/>
                     </div>
                     <div className="col">
                         <label className="form-label">Fecha Devolución</label>
-                        <input type="date" name="fechaDevolucion" className="form-control"/>
+                        <input 
+                            type="date" 
+                            name="fechaDevolucion" 
+                            className="form-control" 
+                            value={formData.fechaDevolucion || ''}
+                            onChange={handleChange}/>
                     </div>
                 </div>
 
                 <div className="row mb-3">
                     <div className="col">
                         <label className="form-label">Número de Factura</label>
-                        <input type="text" className="form-control" name="numFactura"/>
+                        <input 
+                            type="text" 
+                            className="form-control" 
+                            name="numFactura" 
+                            value={formData.numFactura || ""}
+                            onChange={handleChange}/>
                     </div>
                     <div className="col">
                         <label className="form-label">Punto</label>
-                        <input type="text" name="punto" className="form-control"/>
+                        <input 
+                            type="text" 
+                            name="punto" 
+                            className="form-control" 
+                            value={formData.punto || ""}
+                            onChange={handleChange}/>
                     </div>
                 </div>
                 
                 <div className="row mb-3">
                     <div className="col">
                         <label className="form-label">Tipo Contrato </label>
-                        <input type="text" name="tipoContrato" className="form-control"/>
+                        <input 
+                            type="text" 
+                            name="tipoContrato" 
+                            className="form-control" 
+                            value={formData.tipoContrato || ''}
+                            onChange={handleChange}/>
                     </div>
                     <div className="col">
                         <label className="form-label">Factura Nueva</label>
-                        <input type="text" name="facturaNueva" className="form-control" />
+                        <input 
+                            type="text" 
+                            name="facturaNueva" 
+                            className="form-control" 
+                            value={formData.facturaNueva || ""}
+                            onChange={handleChange} />
                     </div>
                 </div>
 
                 <div className="row mb-3">
                     <div className="col">
                         <label className="form-label">Modalidad</label>
-                        <input type="text" className="form-control" name="modalidad"/>
+                        <input 
+                            type="text" 
+                            className="form-control" 
+                            name="modalidad" 
+                            value={formData.modalidad || ""}
+                            onChange={handleChange}/>
                     </div>
                     <div className="col d-flex justify-content-center align-items-end">
                         <button className="btn btn-dark" disabled={btnAvailable}>Enviar</button>
