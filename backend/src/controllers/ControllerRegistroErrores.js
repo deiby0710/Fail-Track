@@ -8,14 +8,14 @@ export const  createRegistroError = async(req, res) => {
         if (!nombre || !tipoError || !punto || !modalidad || !fecha || !eps) {
             return res.status(400).json({message: "Campos obligatorios: Nombre, TipoError, Punto, Modalidad, Fecha, EPS"})
         }
-
         const created = await createError({
             nombre,
             tipoError,
             punto,
             modalidad,
             fecha: formateDate(fecha),
-            eps
+            eps,
+            createdBy: req.user.id
         });
 
         return res.status(201).json(created)

@@ -16,9 +16,11 @@ model RegistroErrores {
     modalidad  String    @db.VarChar(20)
     fecha      DateTime
     eps        String    @db.VarChar(40)
-    createdBy  String    @db.VarChar(50)
+    createdBy  Int
     createdAt  DateTime  @default(now())
     updatedAt  DateTime  @updatedAt
+    // FK
+    usuario    Usuarios @relation(fields: [createdBy], references: [id])
 
     @@index([fecha])
     @@index([tipoError])
@@ -34,9 +36,11 @@ model Devoluciones {
     tipoContrato     String    @db.VarChar(20)
     facturaNueva     String?   @db.VarChar(20)
     modalidad        String    @db.VarChar(20)
-    createdBy        String    @db.VarChar(50)
+    createdBy        Int
     createdAt        DateTime  @default(now())
     updatedAt        DateTime  @updatedAt
+    // FK
+    usuario          Usuarios @relation(fields: [createdBy], references: [id])
 
     @@index([fechaEnvio])
     @@index([punto])
@@ -51,6 +55,9 @@ model Usuarios {
     password       String? @db.VarChar(60)
     punto          String? @db.VarChar(50)
     role_failtrack String? @db.VarChar(10)
+    // FK
+    devoluciones   Devoluciones[]
+    errores        RegistroErrores[]
 
     @@index([identificacion])
 }

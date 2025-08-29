@@ -16,7 +16,6 @@ export const RegistroDevolucionesC = async(req, res) => {
         if (!fechaEnvio || !fechaDevolucion || !numFactura || !punto || !tipoContrato || !facturaNueva || !modalidad) {
             return res.status(400).json({ message: "Campos obligatorios: fechaEnvio, fechaDevolucion, numeroFactura, punto, tipoContrato, facturaNueva, modalidad"})
         }
-
         const respuesta = await RegistroDevolucionesS({
             fechaEnvio: formateDate(fechaEnvio),
             fechaDevolucion: formateDate(fechaDevolucion),
@@ -24,7 +23,8 @@ export const RegistroDevolucionesC = async(req, res) => {
             punto,
             tipoContrato,
             facturaNueva,
-            modalidad
+            modalidad,
+            createdBy: req.user.id
         })
 
         return res.status(201).json(respuesta)
