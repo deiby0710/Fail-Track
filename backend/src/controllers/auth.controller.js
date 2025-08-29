@@ -3,9 +3,6 @@ import { loginS } from "../service/auth.service.js";
 export async function login(req, res) {
     const { username, password } = req.body
 
-    console.log('Username: ', username)
-    console.log('Password: ', password)
-
     if(!username){
         return res.status(400).json({error: 'Username es obligatorio'})
     }

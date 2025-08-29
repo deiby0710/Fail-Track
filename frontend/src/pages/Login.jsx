@@ -1,25 +1,25 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import { useNavigate } from "react-router-dom";
-import users from "../data/users.json";
+import { login } from "../services/auth.service";
 import { defaultAlert, timedAlert } from "../utils/alert";
 
 export const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true)
 
-        if (!username.trim() || !password.trim()) return defaultAlert('warning','Campos incompletos','Digite Usuario y Contraseña.');
-
-        const user = users.find(u => u.username === username && u.password === password)
-        if (user) {
-            timedAlert('success', `¡Bienvenido ${username}!`)
-            navigate('/home')
-        } else {
-            defaultAlert('error', 'Error al inciar sesión', 'Contraseña o usuario incorrecto')
+        const { ok, data, error } = await login({ username, password });
+        setLoading(false)
+        if (!ok) {
+            return defaultAlert("error", error, "Vuelva a intentarlo");
         }
+        timedAlert("success", `¡Bienvenido ${data.admin.usuario}!`);
+        navigate("/home");
     }
 
     return (
@@ -47,7 +47,7 @@ export const Login = () => {
                             onChange={(e)=>{ setPassword(e.target.value)}}
                         />
                     </div>
-                    <button type="submit" className="btn btn-secondary mt-3">Consultar</button>
+                    <button type="submit" className="btn btn-secondary mt-3" disabled={loading}>Consultar</button>
                 </form>
             </div>
             <div>

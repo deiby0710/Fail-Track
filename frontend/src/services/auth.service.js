@@ -1,0 +1,40 @@
+import { api } from "../api/axiosConfig";
+
+export const login = async ({username, password}) => {
+    try {
+        const response = await api.post("api/login", {username, password});
+        // Guardamos el token en el local storage
+        const { token, admin } = response.data;
+        localStorage.setItem("token", token);
+
+        return {
+            ok: true,
+            data: {token, admin},
+            error: null
+        }
+    } catch (error) {
+        console.error("Error en el servicio de login:", error);
+        if (error.response) {
+            return {
+                ok: false,
+                data: null,
+                error: error.response.data.error || "Error en el servidor"
+            };
+        } else if (error.code === "ERR_NETWORK") {
+            return {
+                ok: false,
+                data: null,
+                error: "No hay conexión a internet. Intente más tarde."
+            };
+        } else {
+        return {
+            ok: false,
+            data: null,
+            error: "Error inesperado. Intente más tarde."
+        };
+    }}
+}
+
+export const logout = () => {
+  localStorage.removeItem("token");
+};

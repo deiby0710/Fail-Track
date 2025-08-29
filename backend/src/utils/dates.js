@@ -13,6 +13,5 @@ export const formateDate = (formateDate) => {
     const minutos = "00";
     const segundos = "00";
     const milisegundos = "000";
-    console.log("La hora sera: " + `${hora} -- ${minutos} -- ${segundos}`)
     return `${año}-${mes}-${dia}T${hora}:${minutos}:${segundos}.${milisegundos}Z`;
 }
