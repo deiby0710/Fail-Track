@@ -23,6 +23,9 @@ export async function login(req, res) {
         if (error.message === 'PASSWORD_INCORRECTA') {
             return res.status(401).json({error: 'Contraseña incorrecta'})
         }
+        if (error.message === 'USUARIO_SIN_PERMISOS') {
+            return res.status(401).json({error: 'El Usuario No Tiene Permisos'})
+        }
         console.error('Error en el login: ', error)
         res.status(500).json({ error: 'Error en el servidor.'})
     }

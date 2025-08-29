@@ -16,9 +16,13 @@ export async function loginS({username, password}) {
     if (password !== admin.password){
         throw new Error("PASSWORD_INCORRECTA")
     }
+    // Verificamos el role
+    if (admin.role_failtrack===null){
+        throw new Error("USUARIO_SIN_PERMISOS")
+    }
 
     const token = jwt.sign(
-        { id: admin.id, nombre: admin.nombre },
+        { id: admin.id, nombre: admin.nombre, role_failtrack: admin.role_failtrack },
         process.env.JWT_SECRET,
         { expiresIn: '8h'}
     )

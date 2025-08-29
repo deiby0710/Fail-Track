@@ -11,11 +11,11 @@ export function verifyToken(req, res, next) {
 
     if(!token) {
         return res.status(401).json({ error: 'Formato de token invalido'})
-    }
+    }    
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
-        req.admin = decoded // Guarda la info del admin en el request
+        req.user = decoded // Guarda la info del user en el request
         next()
     } catch (error) {
         return res.status(403).json({ error: 'Token invalido o expirado.'})

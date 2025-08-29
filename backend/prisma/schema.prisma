@@ -10,12 +10,13 @@ datasource db {
 
 model RegistroErrores {
     id         Int       @id @default(autoincrement())
-    nombre     String
+    nombre     String    @db.VarChar(100)
     tipoError  String
-    punto      String
-    modalidad  String
+    punto      String    @db.VarChar(40)
+    modalidad  String    @db.VarChar(20)
     fecha      DateTime
-    eps        String
+    eps        String    @db.VarChar(40)
+    createdBy  String    @db.VarChar(50)
     createdAt  DateTime  @default(now())
     updatedAt  DateTime  @updatedAt
 
@@ -27,12 +28,13 @@ model RegistroErrores {
 model Devoluciones {
     id               Int       @id @default(autoincrement())
     fechaEnvio       DateTime
-    fechaDevolucion  DateTime?
-    numFactura       String
-    punto            String
-    tipoContrato     String
-    facturaNueva     String?
-    modalidad        String
+    fechaDevolucion  DateTime? 
+    numFactura       String    @db.VarChar(30)
+    punto            String    @db.VarChar(40)
+    tipoContrato     String    @db.VarChar(20)
+    facturaNueva     String?   @db.VarChar(20)
+    modalidad        String    @db.VarChar(20)
+    createdBy        String    @db.VarChar(50)
     createdAt        DateTime  @default(now())
     updatedAt        DateTime  @updatedAt
 
@@ -48,7 +50,7 @@ model Usuarios {
     username       String  @unique  @db.VarChar(50) 
     password       String? @db.VarChar(60)
     punto          String? @db.VarChar(50)
-    role           String? @db.VarChar(20)
+    role_failtrack String? @db.VarChar(10)
 
     @@index([identificacion])
 }
